@@ -6,28 +6,41 @@ import './ColorInspection.css';
 const ColorInspection = () => {
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const inspectionData = [
-    { name: 'Approved', value: 10, color: '#10b981' },
-    { name: 'Pending', value: 2, color: '#fbbf24' },
-    { name: 'Rejected', value: 3, color: '#ef4444' }
+  // Function to determine status based on delta E value
+  const getStatusByDeltaE = (deltaE) => {
+    if (deltaE === null || deltaE === undefined) return 'pending';
+    if (deltaE > 3) return 'approved';
+    if (deltaE <= 2) return 'rejected';
+    return 'pending'; // for values between 2 and 3
+  };
+
+  const rawInspections = [
+    { date: '28/11/25', color: 'Navy', client: 'Modenik', lotNo: '12814/1/D', deltaE: 3.5 },
+    { date: '28/11/25', color: 'Olive', client: 'Modenik', lotNo: '111', deltaE: 0.6 },
+    { date: '28/11/25', color: 'Poseidon', client: 'Modenik', lotNo: '109', deltaE: 3.3 },
+    { date: '28/11/25', color: 'Graphwine', client: 'Modenik', lotNo: '109', deltaE: 0.9 },
+    { date: '29/11/25', color: 'Air Force', client: 'JG', lotNo: '371', deltaE: 3.1 },
+    { date: '29/11/25', color: 'Charcoal', client: 'JG', lotNo: '371', deltaE: 3.8},
+    { date: '29/11/25', color: 'Dk. Brown', client: 'JG', lotNo: '375', deltaE: null },
+    { date: '29/11/25', color: 'DmnBlue', client: 'JG', lotNo: '375', deltaE: 0.4 },
+    { date: '1/12/25', color: 'Olive', client: 'LUX', lotNo: '2003', deltaE: null },
+    { date: '1/12/25', color: 'H. Orange', client: 'LUX', lotNo: '2002', deltaE: 3.1 },
+    { date: '29/11/25', color: 'Air Force', client: 'JG', lotNo: '371', deltaE: 3.7 },
+    { date: '2/12/25', color: 'Navy', client: 'Modenik', lotNo: '13145', deltaE: 1.2 },
+    { date: '2/12/25', color: 'Poseidon', client: 'JG', lotNo: '109', deltaE: 1.8 },
+    { date: '3/12/25', color: 'Olive', client: 'Modenik', lotNo: '13143', deltaE: 3.4},
+    { date: '3/12/25', color: 'C. Brown', client: 'Modenik', lotNo: '112', deltaE: 0.9 }
   ];
 
-  const inspections = [
-    { date: '28/11/25', color: 'Navy', client: 'Modenik', lotNo: '12814/1/D', deltaE: 0.8, status: 'approved' },
-    { date: '28/11/25', color: 'Olive', client: 'Modenik', lotNo: '111', deltaE: 0.6, status: 'approved' },
-    { date: '28/11/25', color: 'Poseidon', client: 'Modenik', lotNo: '109', deltaE: 2.1, status: 'rejected' },
-    { date: '28/11/25', color: 'Graphwine', client: 'Modenik', lotNo: '109', deltaE: 0.9, status: 'approved' },
-    { date: '29/11/25', color: 'Air Force', client: 'JG', lotNo: '371', deltaE: 0.5, status: 'approved' },
-    { date: '29/11/25', color: 'Charcoal', client: 'JG', lotNo: '371', deltaE: 0.7, status: 'approved' },
-    { date: '29/11/25', color: 'Dk. Brown', client: 'JG', lotNo: '375', deltaE: null, status: 'pending' },
-    { date: '29/11/25', color: 'DmnBlue', client: 'JG', lotNo: '375', deltaE: 0.4, status: 'approved' },
-    { date: '1/12/25', color: 'Olive', client: 'LUX', lotNo: '2003', deltaE: null, status: 'pending' },
-    { date: '1/12/25', color: 'H. Orange', client: 'LUX', lotNo: '2002', deltaE: 0.4, status: 'approved' },
-    { date: '29/11/25', color: 'Air Force', client: 'JG', lotNo: '371', deltaE: 0.6, status: 'approved' },
-    { date: '2/12/25', color: 'Navy', client: 'Modenik', lotNo: '13145', deltaE: 1.2, status: 'rejected' },
-    { date: '2/12/25', color: 'Poseidon', client: 'JG', lotNo: '109', deltaE: 1.8, status: 'rejected' },
-    { date: '3/12/25', color: 'Olive', client: 'Modenik', lotNo: '13143', deltaE: 0.7, status: 'approved' },
-    { date: '3/12/25', color: 'C. Brown', client: 'Modenik', lotNo: '112', deltaE: 0.9, status: 'approved' }
+  const inspections = rawInspections.map(item => ({
+    ...item,
+    status: getStatusByDeltaE(item.deltaE)
+  }));
+
+  const inspectionData = [
+    { name: 'Approved', value: inspections.filter(i => i.status === 'approved').length, color: '#10b981' },
+    { name: 'Pending', value: inspections.filter(i => i.status === 'pending').length, color: '#fbbf24' },
+    { name: 'Rejected', value: inspections.filter(i => i.status === 'rejected').length, color: '#ef4444' }
   ];
 
   const filteredInspections = inspections.filter(item => {
@@ -59,9 +72,9 @@ const ColorInspection = () => {
 
   const getDeltaEClass = (deltaE) => {
     if (!deltaE) return '';
-    if (deltaE <= 1) return 'delta-good';
-    if (deltaE <= 2) return 'delta-warning';
-    return 'delta-bad';
+    if (deltaE > 3) return 'delta-good';  // > 3 is good
+    if (deltaE > 2) return 'delta-warning';  // 2-3 is warning
+    return 'delta-bad';  // <= 2 is bad/rejected
   };
 
   const totalInspections = inspections.length;
@@ -106,10 +119,10 @@ const ColorInspection = () => {
 
         <div className="stat-card">
           <div className="stat-icon-wrapper purple">
-            <span className="delta-symbol">ΔE</span>
+            <span className="delta-symbol">📊</span>
           </div>
           <div className="stat-details">
-            <p className="stat-label">Avg Delta E</p>
+            <p className="stat-label">Avg Rating</p>
             <h3 className="stat-number">{avgDeltaE}</h3>
           </div>
         </div>
@@ -205,7 +218,7 @@ const ColorInspection = () => {
                   <th>Color</th>
                   <th>Client</th>
                   <th>Lot No.</th>
-                  <th>ΔE</th>
+                  <th>Rating</th>
                   <th>Status</th>
                 </tr>
               </thead>

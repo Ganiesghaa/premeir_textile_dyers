@@ -5,6 +5,13 @@ import './BatchHistory.css';
 const BatchHistory = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBatch, setSelectedBatch] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState('date');
+  const [sortOrder, setSortOrder] = useState('desc');
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [filterMachine, setFilterMachine] = useState('all');
+  const [filterParty, setFilterParty] = useState('all');
+  const itemsPerPage = 8;
 
   // Download batch report as text file
   const downloadBatchReport = (batch) => {
@@ -246,15 +253,547 @@ Report Generated: ${new Date().toLocaleString()}
         { name: 'Soap Steam', duration: '62 min', temp: '98°C' },
         { name: 'Unload', duration: '23 min', temp: '30°C' }
       ]
+    },
+    {
+      id: 'BTH-2506',
+      date: '2025-12-07',
+      machine: 'SF-05',
+      party: 'LUX',
+      color: 'Forest Green',
+      lotNo: '2156/2157',
+      quantity: '428 kg',
+      duration: '7h 35m',
+      status: 'completed',
+      efficiency: 92,
+      deltaE: 1.1,
+      operator: 'Hassan Ali',
+      recipe: {
+        dyes: [
+          { name: 'GREEN L (Divine)', qty: '2.2%' },
+          { name: 'YELLOW ME49L (Divine)', qty: '0.8%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '2.5%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '33 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '128 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '52 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '68 min', temp: '98°C' },
+        { name: 'Unload', duration: '24 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2507',
+      date: '2025-12-07',
+      machine: 'SF-06',
+      party: 'Modenik',
+      color: 'Maroon',
+      lotNo: '114',
+      quantity: '485 kg',
+      duration: '7h 50m',
+      status: 'completed',
+      efficiency: 87,
+      deltaE: 1.3,
+      operator: 'Bilal Ahmed',
+      recipe: {
+        dyes: [
+          { name: 'RED W3R (Divine)', qty: '3.2%' },
+          { name: 'BLACK B (SF) Divine', qty: '1.8%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3.5%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '35 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '140 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '55 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '70 min', temp: '98°C' },
+        { name: 'Unload', duration: '25 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2508',
+      date: '2025-12-06',
+      machine: 'SF-01',
+      party: 'JG',
+      color: 'Light Grey',
+      lotNo: '372',
+      quantity: '312 kg',
+      duration: '6h 20m',
+      status: 'rejected',
+      efficiency: 79,
+      deltaE: 2.8,
+      operator: 'Zain Abbas',
+      recipe: {
+        dyes: [
+          { name: 'BLACK B (SF) Divine', qty: '1.2%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '28 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '110 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '38 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '50 min', temp: '98°C' },
+        { name: 'Unload', duration: '18 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2509',
+      date: '2025-12-06',
+      machine: 'SF-04',
+      party: 'LUX',
+      color: 'Ivory',
+      lotNo: '2388/2389',
+      quantity: '562 kg',
+      duration: '8h 05m',
+      status: 'completed',
+      efficiency: 90,
+      deltaE: 0.5,
+      operator: 'Amir Khan',
+      recipe: {
+        dyes: [
+          { name: 'YELLOW ME49L (Divine)', qty: '0.5%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Bleaching Agent', qty: '1.2g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '36 min', temp: '25°C' },
+        { name: 'Bleaching', duration: '90 min', temp: '60°C' },
+        { name: 'Dyeing', duration: '100 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '58 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '72 min', temp: '98°C' },
+        { name: 'Unload', duration: '26 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2510',
+      date: '2025-12-05',
+      machine: 'SF-02',
+      party: 'Modenik',
+      color: 'Teal Blue',
+      lotNo: '115',
+      quantity: '493 kg',
+      duration: '7h 45m',
+      status: 'completed',
+      efficiency: 93,
+      deltaE: 0.7,
+      operator: 'Hassan Ali',
+      recipe: {
+        dyes: [
+          { name: 'BLUE RR (Divine)', qty: '2.8%' },
+          { name: 'GREEN L (Divine)', qty: '1.2%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '34 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '138 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '50 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '65 min', temp: '98°C' },
+        { name: 'Unload', duration: '24 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2511',
+      date: '2025-12-05',
+      machine: 'SF-03',
+      party: 'JG',
+      color: 'Burgundy',
+      lotNo: '373',
+      quantity: '441 kg',
+      duration: '7h 25m',
+      status: 'completed',
+      efficiency: 88,
+      deltaE: 1.4,
+      operator: 'Bilal Ahmed',
+      recipe: {
+        dyes: [
+          { name: 'RED W3R (Divine)', qty: '3.5%' },
+          { name: 'BLACK B (SF) Divine', qty: '2.1%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '31 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '135 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '52 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '67 min', temp: '98°C' },
+        { name: 'Unload', duration: '24 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2512',
+      date: '2025-12-04',
+      machine: 'SF-07',
+      party: 'LUX',
+      color: 'Pearl White',
+      lotNo: '2390/2391',
+      quantity: '518 kg',
+      duration: '8h 15m',
+      status: 'completed',
+      efficiency: 91,
+      deltaE: 0.4,
+      operator: 'Hassan Ali',
+      recipe: {
+        dyes: [
+          { name: 'OPTICAL BRIGHTENER', qty: '0.8%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Bleaching Agent', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3.5%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '35 min', temp: '25°C' },
+        { name: 'Bleaching', duration: '95 min', temp: '60°C' },
+        { name: 'Dyeing', duration: '105 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '60 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '75 min', temp: '98°C' },
+        { name: 'Unload', duration: '27 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2513',
+      date: '2025-12-04',
+      machine: 'SF-06',
+      party: 'Modenik',
+      color: 'Deep Purple',
+      lotNo: '116',
+      quantity: '476 kg',
+      duration: '7h 55m',
+      status: 'completed',
+      efficiency: 86,
+      deltaE: 1.6,
+      operator: 'Zain Abbas',
+      recipe: {
+        dyes: [
+          { name: 'BLUE RR (Divine)', qty: '2.5%' },
+          { name: 'RED W3R (Divine)', qty: '1.8%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3.5%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '34 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '142 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '54 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '72 min', temp: '98°C' },
+        { name: 'Unload', duration: '26 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2514',
+      date: '2025-12-03',
+      machine: 'SF-04',
+      party: 'JG',
+      color: 'Copper',
+      lotNo: '374',
+      quantity: '388 kg',
+      duration: '7h 10m',
+      status: 'rejected',
+      efficiency: 80,
+      deltaE: 2.5,
+      operator: 'Amir Khan',
+      recipe: {
+        dyes: [
+          { name: 'ORANGE R (Divine)', qty: '2.8%' },
+          { name: 'YELLOW ME49L (Divine)', qty: '0.6%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '30 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '125 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '45 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '60 min', temp: '98°C' },
+        { name: 'Unload', duration: '22 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2515',
+      date: '2025-12-03',
+      machine: 'SF-01',
+      party: 'LUX',
+      color: 'Sea Green',
+      lotNo: '2392/2393',
+      quantity: '527 kg',
+      duration: '7h 40m',
+      status: 'completed',
+      efficiency: 94,
+      deltaE: 0.6,
+      operator: 'Hassan Ali',
+      recipe: {
+        dyes: [
+          { name: 'GREEN L (Divine)', qty: '2.5%' },
+          { name: 'BLUE RR (Divine)', qty: '1.2%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '33 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '136 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '51 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '66 min', temp: '98°C' },
+        { name: 'Unload', duration: '25 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2516',
+      date: '2025-12-02',
+      machine: 'SF-05',
+      party: 'Modenik',
+      color: 'Plum',
+      lotNo: '117',
+      quantity: '434 kg',
+      duration: '7h 35m',
+      status: 'completed',
+      efficiency: 89,
+      deltaE: 1.2,
+      operator: 'Bilal Ahmed',
+      recipe: {
+        dyes: [
+          { name: 'BLUE RR (Divine)', qty: '2.2%' },
+          { name: 'RED W3R (Divine)', qty: '2.1%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3.2%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '32 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '132 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '48 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '64 min', temp: '98°C' },
+        { name: 'Unload', duration: '23 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2517',
+      date: '2025-12-02',
+      machine: 'SF-02',
+      party: 'JG',
+      color: 'Stone Grey',
+      lotNo: '375',
+      quantity: '495 kg',
+      duration: '6h 55m',
+      status: 'completed',
+      efficiency: 92,
+      deltaE: 0.8,
+      operator: 'Zain Abbas',
+      recipe: {
+        dyes: [
+          { name: 'BLACK B (SF) Divine', qty: '1.5%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '30 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '118 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '42 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '58 min', temp: '98°C' },
+        { name: 'Unload', duration: '21 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2518',
+      date: '2025-12-01',
+      machine: 'SF-03',
+      party: 'LUX',
+      color: 'Sage',
+      lotNo: '2394/2395',
+      quantity: '512 kg',
+      duration: '7h 50m',
+      status: 'completed',
+      efficiency: 95,
+      deltaE: 0.5,
+      operator: 'Hassan Ali',
+      recipe: {
+        dyes: [
+          { name: 'GREEN L (Divine)', qty: '2.0%' },
+          { name: 'YELLOW ME49L (Divine)', qty: '1.2%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '35 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '140 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '52 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '68 min', temp: '98°C' },
+        { name: 'Unload', duration: '25 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2519',
+      date: '2025-12-01',
+      machine: 'SF-06',
+      party: 'Modenik',
+      color: 'Slate',
+      lotNo: '118',
+      quantity: '467 kg',
+      duration: '7h 20m',
+      status: 'completed',
+      efficiency: 90,
+      deltaE: 1.0,
+      operator: 'Amir Khan',
+      recipe: {
+        dyes: [
+          { name: 'BLUE RR (Divine)', qty: '1.8%' },
+          { name: 'BLACK B (SF) Divine', qty: '1.5%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '32 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '128 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '46 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '62 min', temp: '98°C' },
+        { name: 'Unload', duration: '22 min', temp: '30°C' }
+      ]
+    },
+    {
+      id: 'BTH-2520',
+      date: '2025-11-30',
+      machine: 'SF-07',
+      party: 'JG',
+      color: 'Crimson',
+      lotNo: '376',
+      quantity: '448 kg',
+      duration: '7h 30m',
+      status: 'completed',
+      efficiency: 87,
+      deltaE: 1.3,
+      operator: 'Bilal Ahmed',
+      recipe: {
+        dyes: [
+          { name: 'RED W3R (Divine)', qty: '3.8%' },
+          { name: 'BLUE RR (Divine)', qty: '0.5%' }
+        ],
+        chemicals: [
+          { name: 'Wetting Oil - BMW/CFLD', qty: '2g/l' },
+          { name: 'Soaping Oil - OL 40', qty: '1.5g/l' },
+          { name: 'Softner Cakes (1:15)', qty: '3%' }
+        ]
+      },
+      stages: [
+        { name: 'TD Load', duration: '33 min', temp: '25°C' },
+        { name: 'Dyeing', duration: '137 min', temp: '90°C' },
+        { name: 'Soap Run', duration: '50 min', temp: '80°C' },
+        { name: 'Soap Steam', duration: '65 min', temp: '98°C' },
+        { name: 'Unload', duration: '25 min', temp: '30°C' }
+      ]
     }
   ];
 
-  const filteredBatches = batches.filter(batch => 
-    batch.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    batch.color.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    batch.lotNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    batch.party.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredBatches = batches
+    .filter(batch => {
+      // Search filter
+      const matchesSearch = batch.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        batch.color.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        batch.lotNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        batch.party.toLowerCase().includes(searchQuery.toLowerCase());
+      
+      // Status filter
+      const matchesStatus = filterStatus === 'all' || batch.status === filterStatus;
+      
+      // Machine filter
+      const matchesMachine = filterMachine === 'all' || batch.machine === filterMachine;
+      
+      // Party filter
+      const matchesParty = filterParty === 'all' || batch.party === filterParty;
+      
+      return matchesSearch && matchesStatus && matchesMachine && matchesParty;
+    })
+    .sort((a, b) => {
+      let aValue, bValue;
+      
+      switch(sortBy) {
+        case 'date':
+          aValue = new Date(a.date);
+          bValue = new Date(b.date);
+          break;
+        case 'efficiency':
+          aValue = a.efficiency;
+          bValue = b.efficiency;
+          break;
+        case 'quantity':
+          aValue = parseFloat(a.quantity);
+          bValue = parseFloat(b.quantity);
+          break;
+        case 'deltaE':
+          aValue = a.deltaE;
+          bValue = b.deltaE;
+          break;
+        default:
+          return 0;
+      }
+      
+      if (sortOrder === 'asc') {
+        return aValue > bValue ? 1 : -1;
+      } else {
+        return aValue < bValue ? 1 : -1;
+      }
+    });
+
+  // Pagination
+  const totalPages = Math.ceil(filteredBatches.length / itemsPerPage);
+  const paginatedBatches = filteredBatches.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
   );
+
+  // Get unique values for filters
+  const uniqueMachines = [...new Set(batches.map(b => b.machine))].sort();
+  const uniqueParties = [...new Set(batches.map(b => b.party))].sort();
 
   const completedCount = batches.filter(b => b.status === 'completed').length;
   const totalQuantity = batches.reduce((sum, b) => sum + parseFloat(b.quantity), 0);
@@ -320,7 +859,7 @@ Report Generated: ${new Date().toLocaleString()}
         </div>
       </div>
 
-      {/* Search Bar */}
+      {/* Search Bar & Filters */}
       <div className="search-container">
         <Search size={20} className="search-icon" />
         <input
@@ -332,9 +871,73 @@ Report Generated: ${new Date().toLocaleString()}
         />
       </div>
 
+      {/* Filters & Sorting */}
+      <div className="filters-section">
+        <div className="filter-group">
+          <label>Status:</label>
+          <select value={filterStatus} onChange={(e) => {
+            setFilterStatus(e.target.value);
+            setCurrentPage(1);
+          }} className="filter-select">
+            <option value="all">All Status</option>
+            <option value="completed">Completed</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label>Machine:</label>
+          <select value={filterMachine} onChange={(e) => {
+            setFilterMachine(e.target.value);
+            setCurrentPage(1);
+          }} className="filter-select">
+            <option value="all">All Machines</option>
+            {uniqueMachines.map(machine => (
+              <option key={machine} value={machine}>{machine}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label>Party:</label>
+          <select value={filterParty} onChange={(e) => {
+            setFilterParty(e.target.value);
+            setCurrentPage(1);
+          }} className="filter-select">
+            <option value="all">All Parties</option>
+            {uniqueParties.map(party => (
+              <option key={party} value={party}>{party}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label>Sort By:</label>
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="filter-select">
+            <option value="date">Date</option>
+            <option value="efficiency">Efficiency</option>
+            <option value="quantity">Quantity</option>
+            <option value="deltaE">Delta E</option>
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label>Order:</label>
+          <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="filter-select">
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="results-info">
+        Showing {paginatedBatches.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0} to {Math.min(currentPage * itemsPerPage, filteredBatches.length)} of {filteredBatches.length} batches
+      </div>
+
       {/* Batch List */}
       <div className="batch-list">
-        {filteredBatches.map((batch) => (
+        {paginatedBatches.length > 0 ? (
+          paginatedBatches.map((batch) => (
           <div key={batch.id} className="batch-card">
             <div className="batch-header">
               <div className="batch-title">
@@ -394,8 +997,46 @@ Report Generated: ${new Date().toLocaleString()}
               </div>
             </div>
           </div>
-        ))}
+        ))
+        ) : (
+          <div className="no-results">
+            <p>No batches found matching your filters.</p>
+          </div>
+        )}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button 
+            className="pagination-btn" 
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          
+          <div className="pagination-numbers">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <button
+                key={page}
+                className={`pagination-number ${currentPage === page ? 'active' : ''}`}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+          
+          <button 
+            className="pagination-btn"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
 
       {/* Batch Detail Modal */}
       {selectedBatch && (
@@ -420,7 +1061,7 @@ Report Generated: ${new Date().toLocaleString()}
                   <div><strong>Quantity:</strong> {selectedBatch.quantity}</div>
                   <div><strong>Duration:</strong> {selectedBatch.duration}</div>
                   <div><strong>Efficiency:</strong> {selectedBatch.efficiency}%</div>
-                  <div><strong>Delta E:</strong> <span className={getDeltaEClass(selectedBatch.deltaE)}>{selectedBatch.deltaE}</span></div>
+                  <div><strong>Rating:</strong> <span className={getDeltaEClass(selectedBatch.deltaE)}>{selectedBatch.deltaE}</span></div>
                   <div><strong>Operator:</strong> {selectedBatch.operator}</div>
                   <div><strong>Status:</strong> <span className={`status-badge ${getStatusClass(selectedBatch.status)}`}>{selectedBatch.status}</span></div>
                 </div>

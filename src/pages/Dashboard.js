@@ -48,7 +48,7 @@ const Dashboard = () => {
           <div className="kpi-header">
             <div className="kpi-info">
               <p className="kpi-label">Weekly Production</p>
-              <h2 className="kpi-value">2,770 kg</h2>
+              <h2 className="kpi-value">27,720 kg</h2>
               <p className="kpi-meta positive">
                 <TrendingUp size={14} /> +12% from last week
               </p>

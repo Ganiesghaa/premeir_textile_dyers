@@ -1,18 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Settings, FlaskConical, Palette, ChevronLeft, Bell, User, Search, Calendar, History } from 'lucide-react';
+import { LayoutDashboard, Settings, FlaskConical, Palette, ChevronLeft, Bell, User, Search, Calendar, History, LogOut, BookOpen, TrendingUp, Target } from 'lucide-react';
 import './Layout.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, onLogout }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const userMenuRef = useRef(null);
+
+  // Close user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setShowUserMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleLogout = () => {
+    setShowUserMenu(false);
+    if (onLogout) {
+      onLogout();
+    }
+  };
 
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
     { icon: Settings, label: 'Machine Data', path: '/machine-data' },
     { icon: FlaskConical, label: 'Dyes & Chemicals', path: '/dyes-chemicals' },
     { icon: Palette, label: 'Color Inspection', path: '/color-inspection' },
+    { icon: BookOpen, label: 'Color Recipes', path: '/color-recipes' },
+    { icon: TrendingUp, label: 'Quality Reports', path: '/quality-reports' },
+    { icon: Target, label: 'Standards Tracking', path: '/standards-tracking' },
     { icon: Calendar, label: 'Production Schedule', path: '/production-schedule' },
     { icon: Bell, label: 'Alerts', path: '/alerts' },
     { icon: History, label: 'Batch History', path: '/batch-history' }
@@ -23,15 +47,7 @@ const Layout = ({ children }) => {
       <aside className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-header">
           <div className="logo">
-            <div className="logo-icon">
-              <FlaskConical size={24} />
-            </div>
-            {!isSidebarCollapsed && (
-              <div className="logo-text">
-                <div className="company-name">PREMIER</div>
-                <div className="company-subtitle">TEXTILE DYERS</div>
-              </div>
-            )}
+            <img src="/images/ptd logo.png" alt="PTD Logo" className="logo-image" />
           </div>
         </div>
 
@@ -74,9 +90,32 @@ const Layout = ({ children }) => {
               <Bell size={20} />
               <span className="notification-badge">4</span>
             </button>
-            <button className="icon-button user-button">
-              <User size={20} />
-            </button>
+            <div className="user-menu-container" ref={userMenuRef}>
+              <button 
+                className="icon-button user-button"
+                onClick={() => setShowUserMenu(!showUserMenu)}
+              >
+                <User size={20} />
+              </button>
+              {showUserMenu && (
+                <div className="user-dropdown">
+                  <div className="user-info">
+                    <div className="user-avatar">
+                      <User size={20} />
+                    </div>
+                    <div className="user-details">
+                      <div className="user-name">Administrator</div>
+                      <div className="user-role">System Admin</div>
+                    </div>
+                  </div>
+                  <div className="dropdown-divider"></div>
+                  <button className="dropdown-item logout-item" onClick={handleLogout}>
+                    <LogOut size={18} />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 
