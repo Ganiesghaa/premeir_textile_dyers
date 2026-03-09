@@ -1,0 +1,11 @@
+{
+  "name": "consultancy-main",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm --prefix backend start\" \"npm --prefix premeir_textile_dyers start\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}

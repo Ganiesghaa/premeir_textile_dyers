@@ -1,0 +1,15 @@
+.quality-page { padding: 2rem; }
+.quality-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.quality-header h1 { margin: 0; color: #1f2937; }
+.quality-header p { margin: 0.3rem 0 0; color: #64748b; }
+.quality-kpi { background: #eef2ff; color: #3730a3; border-radius: 10px; padding: 0.6rem 0.9rem; font-size: 0.9rem; }
+.quality-search { display: flex; align-items: center; gap: 0.5rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 0.6rem 0.8rem; margin-bottom: 1rem; }
+.quality-search input { border: none; outline: none; width: 100%; font-size: 0.92rem; }
+.quality-table-wrap { background: #fff; border-radius: 12px; padding: 0.6rem; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08); overflow-x: auto; }
+.quality-table { width: 100%; border-collapse: collapse; min-width: 840px; }
+.quality-table th, .quality-table td { border-bottom: 1px solid #e5e7eb; text-align: left; padding: 0.65rem 0.5rem; font-size: 0.88rem; }
+.quality-table th { background: #f8fafc; color: #334155; }
+.verdict-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700; }
+.verdict-badge.good { background: #dcfce7; color: #166534; }
+.verdict-badge.warn { background: #fef3c7; color: #92400e; }
+.verdict-badge.bad { background: #fee2e2; color: #991b1b; }

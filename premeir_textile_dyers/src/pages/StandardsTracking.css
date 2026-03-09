@@ -1,0 +1,14 @@
+.standards-page { padding: 2rem; }
+.standards-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.standards-header h1 { margin: 0; color: #1f2937; }
+.standards-header p { margin: 0.3rem 0 0; color: #64748b; }
+.standards-kpi { display: inline-flex; align-items: center; gap: 0.35rem; background: #ecfdf5; color: #166534; border-radius: 10px; padding: 0.6rem 0.9rem; font-size: 0.9rem; }
+.standards-rules { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.standards-rules span { background: #eef2ff; color: #3730a3; border-radius: 8px; padding: 0.35rem 0.65rem; font-size: 0.82rem; font-weight: 600; }
+.standards-table-wrap { background: #fff; border-radius: 12px; padding: 0.6rem; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08); overflow-x: auto; }
+.standards-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+.standards-table th, .standards-table td { border-bottom: 1px solid #e5e7eb; text-align: left; padding: 0.65rem 0.5rem; font-size: 0.88rem; }
+.standards-table th { background: #f8fafc; color: #334155; }
+.std-badge { padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700; }
+.std-badge.pass { background: #dcfce7; color: #166534; }
+.std-badge.fail { background: #fee2e2; color: #991b1b; }
